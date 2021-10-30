@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 
 //Import UUID Lib
-const uuid = required('uuid/v1');
+const { v1: uuidv1 } = require('uuid')
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -45,7 +45,7 @@ const userSchema = new mongoose.Schema({
 userSchema.virtual('password')
     .set(function (password) {
         this._password = password;
-        this.salt = uuid();
+        this.salt = uuidv1();
         this.hashed_password = this.cryptPassword(password)
     })
     .get(function () {
@@ -55,7 +55,7 @@ userSchema.virtual('password')
 
 
 userSchema.methods = {
-    cryptoPassword: function (password) {
+    cryptPassword: function (password) {
         if (!password) return '';
         try {
             return crypto
@@ -67,3 +67,5 @@ userSchema.methods = {
         }
     }
 }
+
+module.exports = mongoose.model('User', userSchema);

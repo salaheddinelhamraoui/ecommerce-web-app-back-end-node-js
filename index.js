@@ -22,8 +22,10 @@ mongoose.connect(process.env.DATABASE, {
     useUnifiedTopology: true
 })
     .then(() => console.log('db connected'))
-    .catch((err) => console.log(`not connect to the database : ${err.message} `)
-    )
+    .catch((err) => console.log(`not connect to the database : ${err.message} `))
+
+//Middleware
+app.use(express.json())
 
 //Routes Middleware
 app.use('/api/users', userRoutes);
