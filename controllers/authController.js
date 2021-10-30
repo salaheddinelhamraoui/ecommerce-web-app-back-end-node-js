@@ -6,6 +6,8 @@ exports.test = (req, res) => {
     res.send({ message: 'Users Module' })
 }
 
+
+//SignUp Controller
 exports.signup = (req, res) => {
     const user = new User(req.body);
 
@@ -17,6 +19,8 @@ exports.signup = (req, res) => {
     })
 }
 
+
+//SignIn Controller
 exports.signin = (req, res) => {
     const { email, password } = req.body;
 
@@ -47,6 +51,7 @@ exports.signin = (req, res) => {
 }
 
 
+//SignOut Controller
 exports.signout = (req, res) => {
     res.clearCookie('token');
 
