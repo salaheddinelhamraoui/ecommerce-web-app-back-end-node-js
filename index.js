@@ -1,9 +1,22 @@
+
+//import express js
 const express = require('express');
-const app = express();
+
+
+//import Mongo DB
 const mongoose = require('mongoose');
+
+//import routes
+const userRoutes = require('./routes/users');
+
+//Config App
+const app = express();
 require('dotenv').config();
 
 
+
+
+// DB connect
 mongoose.connect(process.env.DATABASE, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -12,11 +25,8 @@ mongoose.connect(process.env.DATABASE, {
     .catch((err) => console.log(`not connect to the database : ${err.message} `)
     )
 
-
-app.get('/', (req, res) => {
-    res.send({ message: "Hello from NodeJS And Express" })
-
-})
+//Routes Middleware
+app.use('/api/users', userRoutes);
 
 const port = process.env.PORT || 3000;
 
