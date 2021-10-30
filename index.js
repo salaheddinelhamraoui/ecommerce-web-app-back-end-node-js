@@ -2,9 +2,13 @@
 //import express js
 const express = require('express');
 
-
 //import Mongo DB
 const mongoose = require('mongoose');
+
+const cookieParser = require('cookie-parser');
+
+// Import Express Validator
+const expressValidator = require('express-validator')
 
 //import routes
 const userRoutes = require('./routes/users');
@@ -25,7 +29,9 @@ mongoose.connect(process.env.DATABASE, {
     .catch((err) => console.log(`not connect to the database : ${err.message} `))
 
 //Middleware
-app.use(express.json())
+app.use(express.json());
+app.use(cookieParser());
+app.use(expressValidator());
 
 //Routes Middleware
 app.use('/api/users', userRoutes);

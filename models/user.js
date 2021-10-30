@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const crypto = require('crypto');
 
 
 //Import UUID Lib
@@ -55,11 +56,14 @@ userSchema.virtual('password')
 
 
 userSchema.methods = {
+    authenticate: function (plaintext) {
+        return this.cryptPassword(plaintext) === this.hashed_password;
+    },
     cryptPassword: function (password) {
         if (!password) return '';
         try {
             return crypto
-                .creatHmac('sha1', this.salt)
+                .createHmac('sha1', this.salt)
                 .update(password)
                 .digest('hex');
         } catch (error) {
