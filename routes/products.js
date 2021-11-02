@@ -12,7 +12,7 @@ router.post('/:productId', showProduct)
 
 router.post('/create/:userId', [requireSignIn, isAuth, isAdmin], createProduct);
 
-router.delete('/:productId', [requireSignIn, isAuth, isAdmin], createProduct);
+router.delete('/:productId/:userId', [requireSignIn, isAuth, isAdmin], removeProduct);
 
 router.param('userId', userById);
 router.param('productId', productById)
