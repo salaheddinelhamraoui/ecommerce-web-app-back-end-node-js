@@ -5,6 +5,9 @@ const express = require('express');
 //import Mongo DB
 const mongoose = require('mongoose');
 
+//import cors plugin
+const cors = require('cors');
+
 //import cookies lib
 const cookieParser = require('cookie-parser');
 
@@ -34,13 +37,14 @@ mongoose.connect(process.env.DATABASE, {
 
 //Middlewares
 app.use(express.json());
+app.use(cors());
 app.use(cookieParser());
 app.use(expressValidator());
 
 
 //Routes Middleware
 app.use('/api', authRoutes);
-app.use('/api', userRoutes);
+app.use('/api/user', userRoutes);
 app.use('/api/category', categoryRoutes);
 app.use('/api/product', productRoutes);
 
